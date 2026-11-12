@@ -40,13 +40,20 @@
 
 ## ✨ امکانات
 
-- 🧪 **DNS Benchmark:** نمایش Last Ping، Average، Jitter و Packet Loss.
-- ⚡ **Single & Group Testing:** تست تکی و گروهی همراه با نمایش پیشرفت و امکان توقف.
-- 📂 **DNS Management:** ساخت گروه اختصاصی، Favorites، Pin و ذخیره اطلاعات.
-- 🔌 **DNS Changer:** تغییر DNS ویندوز و بازگردانی تنظیمات قبلی شبکه.
-- 🧹 **Flush DNS:** پاک‌سازی کش DNS با یک کلیک.
-- 🌐 **Connection Protection:** بررسی اتصال اینترنت و مدیریت تست هنگام قطع ارتباط.
-- 🎨 **Modern UI:** رابط فارسی و انگلیسی، تم تاریک و روشن و Minimize to Tray.
+- 🧪 **DNS Benchmark:**
+-  نمایش Last Ping، Average، Jitter و Packet Loss.
+- ⚡ **Single & Group Testing:**
+-  تست تکی و گروهی همراه با نمایش پیشرفت و امکان توقف.
+- 📂 **DNS Management:**
+-  ساخت گروه اختصاصی، Favorites، Pin و ذخیره اطلاعات.
+- 🔌 **DNS Changer:**
+-  تغییر DNS ویندوز و بازگردانی تنظیمات قبلی شبکه.
+- 🧹 **Flush DNS:**
+-  پاک‌سازی کش DNS با یک کلیک.
+- 🌐 **Connection Protection:**
+-  بررسی اتصال اینترنت و مدیریت تست هنگام قطع ارتباط.
+- 🎨 **Modern UI:**
+-  رابط فارسی و انگلیسی، تم تاریک و روشن و Minimize to Tray.
 
 ## 📊 معیارهای بنچمارک
 
@@ -63,9 +70,9 @@
 
 هر دو ابزار امکانات مرتبط با DNS دارند، اما تمرکز متفاوتی دارند.
 
-**DNS Changer** برای مدیریت، تست و مقایسه DNS طراحی شده؛ در مقابل، **Nexus Tweaks** مجموعه گسترده‌تری از ابزارهای بهینه‌سازی ویندوز و گیمینگ را ارائه می‌دهد.
+**DNS Changer** برای مدیریت، تست و مقایسه DNS طراحی شده؛ در مقابل، **Nexus DNS** مجموعه گسترده‌تری از ابزارهای بهینه‌سازی ویندوز و گیمینگ را ارائه می‌دهد.
 
-| قابلیت | DNS Changer | Nexus Tweaks |
+| قابلیت | DNS Changer | Nexus DNS |
 |:---|:---:|:---:|
 | تغییر DNS ویندوز | ✅ | ✅ Pro |
 | تست و Benchmark | ✅ | ✅ |
@@ -73,17 +80,17 @@
 | DNS Failure Rate | ✅ | روش متفاوت |
 | گروه‌بندی و Favorites | ✅ | نامشخص در مستندات عمومی |
 | تست تکی و گروهی | ✅ | جزئیات نامشخص |
-| Flush DNS | ✅ | ذکر نشده |
+| Flush DNS | ✅ | ✅ |
 | Bufferbloat / Traceroute | — | ✅ Pro |
 | Windows Tweaks / Game Booster | — | ✅ |
 
 **کدام را انتخاب کنیم؟**
 
 - 🔴 مدیریت و مقایسه تخصصی DNS: انتخاب DNS Changer
-- ⚡ ابزارهای گسترده‌تر ویندوز و گیمینگ: انتخاب Nexus Tweaks
+- ⚡ ابزارهای گسترده‌تر ویندوز و گیمینگ: انتخاب Nexus DNS
 
 اطلاعات بیشتر:
-- [Nexus Tweaks – Official Website](https://nexustweaks.com/)
+- [Nexus DNS – Official Website](https://nexustweaks.com/)
 - [Plans & Pricing](https://nexustweaks.com/pricing)
 
 ## 🎮 گیمینگ و تأخیر شبکه
@@ -149,31 +156,31 @@ A dedicated Windows tool for testing, comparing, and managing DNS resolvers. Mea
 
 > ⚠️ These metrics measure DNS response performance, not game-server latency or packet loss across the entire network route.
 
-## ⚖️ DNS Changer vs. Nexus Tweaks
+## ⚖️ DNS Changer vs. Nexus DNS
 
 Both tools provide DNS-related features, but their primary focus is different.
 
-**DNS Changer** focuses on DNS management and benchmarking, while **Nexus Tweaks** offers a broader set of Windows and gaming optimization tools.
+**DNS Changer** focuses on DNS management and benchmarking, while **Nexus DNS** offers a broader set of Windows and gaming optimization tools.
 
-| Features | DNS Changer | Nexus Tweaks |
+| Features | DNS Changer | Nexus DNS |
 |:---|:---:|:---:|
 | Windows DNS Changing | ✅ | ✅ Pro |
 | DNS Testing & Benchmark | ✅ | ✅ |
 | Last Ping / Average / Jitter | ✅ | Network tools |
-| DNS Failure Rate | ✅ | Different method |
-| Groups & Favorites | ✅ | Not publicly documented |
-| Single & Group Testing | ✅ | Details not specified |
-| DNS Cache Flush | ✅ | Not listed |
+| DNS Failure Rate | ✅ | ✅ Different method |
+| Groups & Favorites | ✅ | ✅ Best |
+| Single & Group Testing | ✅ | ✅ Best |
+| DNS Cache Flush | ✅ | ✅ |
 | Bufferbloat / Traceroute | — | ✅ Pro |
 | Windows Tweaks / Game Booster | — | ✅ |
 
 **Which one should you choose?**
 
 - 🔴 DNS management and benchmarking: DNS Changer
-- ⚡ Broader Windows and gaming optimization: Nexus Tweaks
+- ⚡ Broader Windows and gaming optimization: Nexus DNS
 
 Learn more:
-- [Nexus Tweaks – Official Website](https://nexustweaks.com/)
+- [Nexus DNS – Official Website](https://nexustweaks.com/)
 - [Plans & Pricing](https://nexustweaks.com/pricing)
 
 ## 🎮 Gaming & Network Latency
