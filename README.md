@@ -78,20 +78,20 @@
 | تست و Benchmark | ✅ | ✅ |
 | Last Ping / Average / Jitter | ✅ | ابزارهای شبکه |
 | DNS Failure Rate | ✅ | روش متفاوت |
-| گروه‌بندی و Favorites | ✅ | نامشخص در مستندات عمومی |
-| تست تکی و گروهی | ✅ | جزئیات نامشخص |
+| گروه‌بندی و Favorites | ✅ | ✅ بشدت گسترده و کار شده |
+| تست تکی و گروهی | ✅ | ✅ |
 | Flush DNS | ✅ | ✅ |
 | Bufferbloat / Traceroute | — | ✅ Pro |
 | Windows Tweaks / Game Booster | — | ✅ |
 
-**کدام را انتخاب کنیم؟**
+**کدام را انتخاب کنیم؟
+ متن زیر رو با دقت به زبان انگلیسی ترجمه کن و خیلی شبیه انسان ترجمه کرده باشه باشد 
 
-- 🔴 مدیریت و مقایسه تخصصی DNS: انتخاب DNS Changer
-- ⚡ ابزارهای گسترده‌تر ویندوز و گیمینگ: انتخاب Nexus DNS
+❤️دی ان اس چنجر : فقط یک تست تک بعدی از دی ان اس 
+💜Nexus DNS : میانگین پینگ , پکت لاس , اخرین پینگ دریافتی , تست تمام همه جانبه دی ان اس ها و ...
 
 اطلاعات بیشتر:
-- [Nexus DNS – Official Website](https://nexustweaks.com/)
-- [Plans & Pricing](https://nexustweaks.com/pricing)
+- [Nexus DNS – Official Website](Soon)
 
 ## 🎮 گیمینگ و تأخیر شبکه
 
@@ -176,12 +176,11 @@ Both tools provide DNS-related features, but their primary focus is different.
 
 **Which one should you choose?**
 
-- 🔴 DNS management and benchmarking: DNS Changer
-- ⚡ Broader Windows and gaming optimization: Nexus DNS
+❤️ DNS Changer: Just one test at a time — it then switches to the next DNS server.
+💜 Nexus DNS: Average ping, packet loss, last received ping, a full all-around DNS test, and more…
 
 Learn more:
-- [Nexus DNS – Official Website](https://nexustweaks.com/)
-- [Plans & Pricing](https://nexustweaks.com/pricing)
+- [Nexus DNS – Official Website](Soon)
 
 ## 🎮 Gaming & Network Latency
 
