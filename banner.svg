@@ -1,0 +1,27 @@
+<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <defs>
+  <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="300" gradientUnits="userSpaceOnUse"><stop stop-color="#08090E"/><stop offset="0.58" stop-color="#171018"/><stop offset="1" stop-color="#08090E"/></linearGradient>
+  <linearGradient id="red" x1="80" y1="20" x2="1080" y2="260" gradientUnits="userSpaceOnUse"><stop stop-color="#FF7777"/><stop offset="0.48" stop-color="#FF2727"/><stop offset="1" stop-color="#9E091B"/></linearGradient>
+  <linearGradient id="white" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFF"/><stop offset="1" stop-color="#AEB6C8"/></linearGradient>
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <pattern id="dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="2" cy="2" r="1" fill="#7D879B" opacity=".2"/></pattern>
+ </defs>
+ <rect width="1200" height="300" rx="28" fill="url(#bg)"/>
+ <rect width="1200" height="300" rx="28" fill="url(#dots)"/>
+ <path d="M-20 240C210 60 400 340 630 150C820 -5 980 65 1220 5" stroke="url(#red)" stroke-width="2" opacity=".72" filter="url(#glow)"/>
+ <path d="M-20 266C230 88 405 360 660 175C850 30 1010 100 1220 38" stroke="#FF3434" stroke-width="1" opacity=".28"/>
+ <g transform="translate(86 58)">
+  <circle cx="88" cy="88" r="74" stroke="url(#white)" stroke-width="3" opacity=".9"/>
+  <ellipse cx="88" cy="88" rx="34" ry="74" stroke="#B8C0D0" stroke-width="2" opacity=".8"/>
+  <path d="M17 88H159M31 48H145M31 128H145" stroke="#B8C0D0" stroke-width="2" opacity=".75"/>
+  <path d="M15 126C65 160 112 12 163 53" stroke="url(#red)" stroke-width="7" stroke-linecap="round" filter="url(#glow)"/>
+  <path d="M125 120L154 111L174 128V157C174 181 157 198 145 204C132 198 115 181 115 157V128L125 120Z" fill="#11131B" stroke="url(#red)" stroke-width="4"/>
+  <path d="M131 155L142 166L161 143" stroke="white" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+ </g>
+ <text x="310" y="132" fill="url(#white)" font-family="Segoe UI, Arial, sans-serif" font-size="58" font-weight="800" letter-spacing="1">DNS CHANGER</text>
+ <text x="314" y="181" fill="#FF5555" font-family="Segoe UI, Arial, sans-serif" font-size="23" font-weight="700" letter-spacing="5">BENCHMARK • MANAGE • CONNECT</text>
+ <text x="315" y="225" fill="#A6ADBD" font-family="Segoe UI, Arial, sans-serif" font-size="18">Measure your resolver. Understand the results. Choose with confidence.</text>
+ <rect x="1000" y="228" width="142" height="34" rx="17" fill="#251016" stroke="#A91F32"/>
+ <text x="1071" y="250" text-anchor="middle" fill="#FF7777" font-family="Segoe UI, Arial, sans-serif" font-size="13" font-weight="700">WINDOWS TOOL</text>
+ <rect x="1" y="1" width="1198" height="298" rx="27" stroke="#FFFFFF" stroke-opacity=".12"/>
+</svg>
