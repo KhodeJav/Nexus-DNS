@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.svg" alt="DNS Changer & Benchmark" width="100%" />
+  <img src="assets_photo/banner.svg" alt="DNS Changer & Benchmark" width="100%" />
   <br />
   <a href="#فارسی">🇮🇷 فارسی</a> · <a href="#english">🇬🇧 English</a>
   <br /><br />
@@ -22,9 +22,9 @@
 یک ابزار ویندوزی برای مدیریت DNS، بررسی کیفیت پاسخ‌گویی سرورها و اعمال سریع و کنترل‌شده تنظیمات شبکه؛ با تمرکز روی سادگی، تست قابل‌فهم و کنترل کامل کاربر.
 
 <p align="center">
-  <img src="assets/app-icon.png" alt="آیکون DNS Changer" width="132" />
+  <img src="assets_photo/app-icon.png" alt="آیکون DNS Changer" width="132" />
   <br />
-  <img src="assets/home-preview.png" alt="پیش‌نمایش صفحه خانه" width="340" />
+  <img src="assets_photo/home-preview.png" alt="پیش‌نمایش صفحه خانه" width="340" />
 </p>
 
 ### ⚡ امکانات اصلی
@@ -90,9 +90,9 @@
 A Windows utility for managing DNS resolvers, measuring their response quality, and applying network settings with a clear, user-controlled workflow.
 
 <p align="center">
-  <img src="assets/app-icon.png" alt="DNS Changer app icon" width="132" />
+  <img src="assets_photo/app-icon.png" alt="DNS Changer app icon" width="132" />
   <br />
-  <img src="assets/home-preview.png" alt="Home screen preview" width="340" />
+  <img src="assets_photo/home-preview.png" alt="Home screen preview" width="340" />
 </p>
 
 ### ⚡ Core features
