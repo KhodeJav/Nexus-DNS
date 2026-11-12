@@ -67,7 +67,7 @@
 
 هر دو ابزار قابلیت‌های مرتبط با DNS دارند، اما فلسفه و تمرکز آن‌ها یکسان نیست.
 
-**DNS Changer** با تمرکز بر مدیریت، تست و مقایسه سرورهای DNS طراحی شده است؛ در مقابل، **Nexus Tweaks** یک مجموعه گسترده‌تر برای بهینه‌سازی ویندوز و گیمینگ است که قابلیت تغییر DNS را نیز در نسخه Pro ارائه می‌دهد.
+**DNS Changer** با تمرکز بر مدیریت، تست و مقایسه سرورهای DNS طراحی شده است؛ در مقابل، **Nexus DNS** یک مجموعه گسترده‌تر برای بهینه‌سازی ویندوز و گیمینگ است که قابلیت تغییر DNS را نیز در نسخه Pro ارائه می‌دهد.
 
 | Features | DNS Changer | Nexus DNS |
 |---|:---:|:---:|
@@ -89,8 +89,8 @@
 اما اگر علاوه بر مدیریت DNS به مجموعه‌ای از ابزارهای بهینه‌سازی ویندوز و گیمینگ مانند Game Booster و Bufferbloat نیاز داری، Nexus گزینه گسترده‌تری محسوب می‌شود.
 
 اطلاعات بیشتر:
-- [Nexus Tweaks – Official Website](https://nexustweaks.com/)
-- [Nexus Tweaks – Plans & Pricing](https://nexustweaks.com/pricing)
+- [Nexus DNS – Official Website](https://nexustweaks.com/)
+- [Nexus DNS – Plans & Pricing](https://nexustweaks.com/pricing)
 
 ## 🎮 Gaming & Network Latency
 
@@ -161,7 +161,7 @@ Each DNS resolver is evaluated using multiple metrics to make performance compar
 
 Both applications offer DNS-related functionality, but their primary goals are different.
 
-**DNS Changer** focuses on DNS management, testing, and resolver benchmarking. **Nexus Tweaks**, on the other hand, is a broader Windows and gaming optimization suite that also includes DNS changing in its Pro plan.
+**DNS Changer** focuses on DNS management, testing, and resolver benchmarking. **Nexus DNS**, on the other hand, is a broader Windows and gaming optimization suite that also includes DNS changing in its Pro plan.
 
 | Features | DNS Changer | Nexus DNS |
 |---|:---:|:---:|
@@ -180,11 +180,11 @@ Both applications offer DNS-related functionality, but their primary goals are d
 
 Choose DNS Changer if your main priority is testing, comparing, and managing DNS resolvers.
 
-Choose Nexus Tweaks if you also need a broader collection of Windows optimization and gaming tools, including Game Booster and Bufferbloat testing.
+Choose Nexus DNS if you also need a broader collection of Windows optimization and gaming tools, including Game Booster and Bufferbloat testing.
 
 Learn more:
-- [Nexus Tweaks – Official Website](https://nexustweaks.com/)
-- [Nexus Tweaks – Plans & Pricing](https://nexustweaks.com/pricing)
+- [Nexus DNS – Official Website](https://nexustweaks.com/)
+- [Nexus DNS – Plans & Pricing](https://nexustweaks.com/pricing)
 
 ## 🎮 Gaming & Network Latency
 
