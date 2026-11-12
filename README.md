@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/banner.svg" alt="DNS Changer & Benchmark" width="100%" />
+  <img src="assets_photo/banner.svg" alt="DNS Changer & Benchmark" width="100%" />
   <br />
   <a href="#فارسی"><strong>فارسی</strong></a> · <a href="#english"><strong>English</strong></a>
   <br /><br />
@@ -26,13 +26,13 @@
 ## پیش‌نمایش طراحی
 
 <p align="center">
-  <img src="assets/app-icon.png" alt="طرح مفهومی آیکون DNS Changer" width="190" />
+  <img src="assets_photo/app-icon.png" alt="طرح مفهومی آیکون DNS Changer" width="190" />
   <br />
   <sub>طرح مفهومی آیکون برنامه — فایل نهایی آیکون پس از آماده‌سازی نسخه اجرایی یکپارچه می‌شود.</sub>
 </p>
 
 <p align="center">
-  <img src="assets/home-preview.png" alt="طرح مفهومی صفحه خانه DNS Changer" width="380" />
+  <img src="assets_photo/home-preview.png" alt="طرح مفهومی صفحه خانه DNS Changer" width="380" />
   <br />
   <sub>تصویر مرجع طراحی صفحه خانه؛ رابط نهایی باید به‌صورت اجزای واقعی و تعاملی PySide6 پیاده‌سازی شود، نه به‌عنوان تصویر پس‌زمینه.</sub>
 </p>
@@ -188,7 +188,7 @@ The goal is not merely to switch DNS addresses. Users should be able to maintain
 ## Design Preview
 
 <p align="center">
-  <img src="assets/app-icon.png" alt="Concept DNS Changer app icon" width="190" />
+  <img src="assets_photo/app-icon.png" alt="Concept DNS Changer app icon" width="190" />
   <br />
   <sub>Concept app icon. The final icon will be integrated into the executable and Windows notification area.</sub>
 </p>
