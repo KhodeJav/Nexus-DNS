@@ -78,6 +78,13 @@
       "country_code": "DE",
       "primary_dns": "91.249.242.34",
       "secondary_dns": "37.156.145.12"
+    },
+    {
+      "id": "public-dns-12",
+      "name": "Rayzen DNS",
+      "country_code": "IR",
+      "primary_dns": "194.32.214.108",
+      "secondary_dns": "194.32.214.163"
     }
   ]
 }
