@@ -839,6 +839,10 @@ class HomePage(QScrollArea):
     def _start_bench(self, items, mode):
         if self.bench is not None:
             return
+        explore = getattr(self.w, "explore", None)
+        if explore is not None and explore.busy:            # one benchmark at a time across the whole app
+            self.w.toast(tr("ex_busy"), "warn")
+            return
         self._mode = mode
         self._count = max(1, self.db.get_int("test_count", 20))
         timeout = self.db.get_int("timeout_ms", 1000)

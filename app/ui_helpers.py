@@ -34,7 +34,7 @@ def stat_text(res, key):
 
 
 def big_value(res):
-    """Text for the prominent 'Last Ping' number of a result (or None)."""
+    """Text for the prominent 'last ping' number of a result (or None)."""
     if not res:
         return "— ms"
     if no_reply(res):

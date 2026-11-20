@@ -14,6 +14,7 @@ from .paths import resource_path
 from .skin import col, skin, tr
 from .widgets import IconButton, NavBar, Toast
 from .workers import NetThread, reconcile_connection
+from .pages.explore import ExplorePage
 from .pages.favorites import FavoritesPage
 from .pages.home import HomePage
 from .pages.settings import SettingsPage
@@ -173,7 +174,7 @@ class MainWindow(QWidget):
         self.really_quit = False
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         self.setAttribute(Qt.WA_TranslucentBackground)
-        self.setWindowTitle("Nexus DNS")
+        self.setWindowTitle("DNS Changer")
         self.app_icon = QIcon(resource_path("assets/icon.png"))
         self.setWindowIcon(self.app_icon)
         self.setMinimumSize(440, 640)
@@ -192,9 +193,10 @@ class MainWindow(QWidget):
         self.stack = QStackedWidget()
         self._outer.addWidget(self.stack, 1)
         self.home = HomePage(self)
+        self.explore = ExplorePage(self)
         self.fav = FavoritesPage(self)
         self.settings = SettingsPage(self)
-        for p in (self.home, self.fav, self.settings):
+        for p in (self.home, self.explore, self.fav, self.settings):      # same order as the navigation bar
             self.stack.addWidget(p)
         nav_wrap = QHBoxLayout()
         nav_wrap.setContentsMargins(14, 4, 14, 14)
@@ -221,7 +223,9 @@ class MainWindow(QWidget):
 
     def _tab_changed(self, idx):
         self.stack.setCurrentIndex(idx)
-        if idx == 2:
+        if idx == 1:
+            self.explore.on_shown()
+        elif idx == 3:
             self.settings.on_shown()
 
     def blur_on(self):
@@ -279,7 +283,7 @@ class MainWindow(QWidget):
         if not QSystemTrayIcon.isSystemTrayAvailable():
             return
         self.tray = QSystemTrayIcon(self.app_icon, self)
-        self.tray.setToolTip("Nexus DNS")
+        self.tray.setToolTip("DNS Changer")
         self.tray_menu = QMenu()
         self.act_open = self.tray_menu.addAction("")
         self.tray_menu.addSeparator()
@@ -302,7 +306,7 @@ class MainWindow(QWidget):
             self.toast(tr("msg_no_tray"), "warn")
             return
         self.hide()
-        self.tray.showMessage("Nexus DNS", tr("tray_hidden"), QSystemTrayIcon.Information, 2500)
+        self.tray.showMessage("DNS Changer", tr("tray_hidden"), QSystemTrayIcon.Information, 2500)
 
     def restore_from_tray(self):
         self.showNormal()
@@ -320,6 +324,7 @@ class MainWindow(QWidget):
     def quit_app(self):
         self.really_quit = True
         self.home.shutdown()
+        self.explore.shutdown()
         self.settings.shutdown()
         self.monitor.shutdown()
         if self.tray:

@@ -1,6 +1,6 @@
 """Favorites page: manage DNS servers and groups."""
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QFrame, QHBoxLayout, QLabel, QMenu, QPushButton, QScrollArea, QVBoxLayout, QWidget
+from PySide6.QtCore import QEvent, Qt
+from PySide6.QtWidgets import QApplication, QFrame, QHBoxLayout, QLabel, QLineEdit, QMenu, QPushButton, QScrollArea, QVBoxLayout, QWidget
 
 from ..dialogs import DnsDialog, GroupDialog, confirm, inform
 from ..skin import col, skin, tr
@@ -42,6 +42,9 @@ class FavoritesPage(QScrollArea):
         super().__init__()
         self.w, self.db = win, win.db
         self.mode = "groups"
+        self.query = ""
+        saved = self.db.get_json("fav_collapsed")
+        self._collapsed = {int(x) for x in saved if isinstance(x, int)} if isinstance(saved, list) else set()
         self.setWidgetResizable(True)
         self.setFrameShape(QFrame.NoFrame)
         self.setHorizontalScrollBarPolicy(Qt.ScrollBarAlwaysOff)
@@ -63,14 +66,23 @@ class FavoritesPage(QScrollArea):
         self.sub = label("", "sub")
         tv.addWidget(self.title)
         tv.addWidget(self.sub)
+        self.btn_search = IconButton("search", "text", 21, "tip_search", object_name="iconbox", pad=20)
+        self.btn_search.clicked.connect(self._toggle_search)
         self.btn_group = IconButton("folder_plus", "text", 21, "add_group", object_name="iconbox", pad=20)
         self.btn_add = IconButton("plus", "text", 21, "add_dns", object_name="iconbox", pad=20)
         self.btn_group.clicked.connect(self.add_group)
         self.btn_add.clicked.connect(self.add_dns)
         head.addLayout(tv, 1)
+        head.addWidget(self.btn_search)
         head.addWidget(self.btn_group)
         head.addWidget(self.btn_add)
         root.addLayout(head)
+
+        self.search = QLineEdit()                                # find a group by its name (hidden until the icon is used)
+        self.search.setClearButtonEnabled(True)
+        self.search.textChanged.connect(self._search_changed)
+        self.search.hide()
+        root.addWidget(self.search)
 
         self.seg = Segmented([("groups", "filter_groups", True), ("fav", "filter_fav", True)])
         self.seg.set_current("groups")
@@ -84,7 +96,47 @@ class FavoritesPage(QScrollArea):
         skin.changed.connect(self.retranslate)
         self.retranslate()
 
+    def _toggle_search(self):
+        if self.search.isVisible():
+            self._close_search()
+            return
+        self.search.show()
+        QApplication.instance().installEventFilter(self)         # a click anywhere else closes the box again
+        if self.mode != "groups":
+            self.seg.set_current("groups")
+            self._set_mode("groups")
+        self.search.setFocus()
+
+    def _close_search(self, after_click=False):
+        self.search.hide()
+        if after_click:
+            # keep the filter until the mouse button is released: rebuilding the list right now would delete the very
+            # widget that was clicked before its click is finished
+            self._clear_on_release = True
+            return
+        QApplication.instance().removeEventFilter(self)
+        self.search.clear()                                      # closing the box shows every group again
+
+    def eventFilter(self, obj, ev):
+        t = ev.type()
+        if t == QEvent.MouseButtonPress and ev.button() == Qt.LeftButton and self.search.isVisible():
+            inside = isinstance(obj, QWidget) and (obj is self.search or self.search.isAncestorOf(obj)
+                                                   or obj is self.btn_search)
+            if not inside:
+                self._close_search(after_click=True)             # the click itself still reaches its target
+        elif t == QEvent.MouseButtonRelease and getattr(self, "_clear_on_release", False):
+            self._clear_on_release = False
+            QApplication.instance().removeEventFilter(self)
+            self.search.clear()
+        return False
+
+    def _search_changed(self, text):
+        self.query = text.strip().lower()
+        if self.mode == "groups":
+            self.reload()
+
     def retranslate(self):
+        self.search.setPlaceholderText(tr("search_group"))
         self.title.setText(tr("fav_title"))
         self.sub.setText(tr("fav_sub"))
         self.reload()
@@ -119,6 +171,11 @@ class FavoritesPage(QScrollArea):
         if not groups:
             self.holder.addWidget(label(tr("empty_all"), "sub", wrap=True, align=Qt.AlignCenter))
             return
+        if self.query:
+            groups = [g for g in groups if self.query in g["name"].lower()]
+            if not groups:
+                self.holder.addWidget(label(tr("no_group_found"), "sub", wrap=True, align=Qt.AlignCenter))
+                return
         for g in groups:
             self.holder.addWidget(self._section(g))
 
@@ -129,6 +186,9 @@ class FavoritesPage(QScrollArea):
         v.setSpacing(8)
         h = QHBoxLayout()
         h.setSpacing(10)
+        folded = g["id"] in self._collapsed
+        fold = IconButton("chevron_right" if folded else "chevron_down", "sub", 20, "tip_collapse", pad=12)
+        h.addWidget(fold)
         h.addWidget(IconChip("folder", "accent2", 36, 18))
         t = QVBoxLayout()
         t.setSpacing(0)
@@ -142,12 +202,28 @@ class FavoritesPage(QScrollArea):
         h.addWidget(add)
         h.addWidget(more)
         v.addLayout(h)
+        content = QWidget(card)                                  # the group's DNS rows: hidden when the group is folded
+        content.setAutoFillBackground(False)
+        cv = QVBoxLayout(content)
+        cv.setContentsMargins(0, 0, 0, 0)
+        cv.setSpacing(8)
         items = self.db.list_dns(g["id"])
         if not items:
-            v.addWidget(label(tr("empty_group"), "sub", align=Qt.AlignCenter))
+            cv.addWidget(label(tr("empty_group"), "sub", align=Qt.AlignCenter))
         for d in items:
-            v.addWidget(DnsRow(self, d))
+            cv.addWidget(DnsRow(self, d))
+        v.addWidget(content)                                     # parent first: show()/setVisible(True) on a parentless
+        if folded:                                               # widget would open it as a separate top-level window
+            content.hide()
+        fold.clicked.connect(lambda: self._fold(g["id"], content, fold))
         return card
+
+    def _fold(self, gid, content, btn):
+        hide = not content.isHidden()                            # own flag: independent of the page being on screen
+        content.setHidden(hide)
+        btn.set_icon("chevron_right" if hide else "chevron_down")
+        (self._collapsed.add if hide else self._collapsed.discard)(gid)
+        self.db.set_json("fav_collapsed", sorted(self._collapsed))
 
     # ------------------------------------------------------------------ actions
     def _done(self, toast=None):

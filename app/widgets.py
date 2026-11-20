@@ -668,7 +668,7 @@ class NavBar(QFrame):
         lay.setContentsMargins(10, 4, 10, 4)
         lay.setSpacing(0)
         self._btns = []
-        for i, (ic, key) in enumerate((("home", "nav_home"), ("heart", "nav_fav"), ("settings", "nav_settings"))):
+        for i, (ic, key) in enumerate((("home", "nav_home"), ("explore", "nav_explore"), ("heart", "nav_fav"), ("settings", "nav_settings"))):
             b = NavButton(ic, key)
             b.clicked.connect(lambda _=False, idx=i: self.set_current(idx, True))
             lay.addWidget(b, 1)

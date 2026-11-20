@@ -25,6 +25,7 @@ BODY = {
     "bell": '<path d="M6 16v-5a6 6 0 1 1 12 0v5l1.6 2.2H4.4z"/><path d="M10 21a2 2 0 0 0 4 0"/>',
     "check": '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
     "check_circle": '<circle cx="12" cy="12" r="9"/><path d="M8 12.5l3 3 5-6"/>',
+    "search": '<circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/>',
     "x": '<path d="M6 6l12 12M18 6L6 18"/>',
     "plus": '<path d="M12 5v14M5 12h14"/>',
     "minus": '<path d="M5 12h14"/>',
@@ -68,6 +69,7 @@ BODY = {
     "megaphone": '<path d="M4 10v4a1 1 0 0 0 1 1h3l8 4V5L8 9H5a1 1 0 0 0-1 1z"/><path d="M19.5 9.5a4 4 0 0 1 0 5"/>',
     "broom": '<path d="M20 4l-7 7"/><path d="M11.16 9.16l3.68 3.68L10.52 19.84 4.16 13.48z"/><path d="M12.4 10.4 6.3 15.6M13.6 11.6l-5.2 6.1"/>',
     "droplet": '<path d="M12 3s6.5 6.6 6.5 11.2a6.5 6.5 0 0 1-13 0C5.5 9.6 12 3 12 3z"/><path d="M9 14.5a3 3 0 0 0 3 3"/>',
+    "compass": '<circle cx="12" cy="12" r="9"/><path d="M15.8 8.2l-2.4 5.2-5.2 2.4 2.4-5.2z"/>',
     "trophy": '<path d="M8 4h8v5a4 4 0 0 1-8 0z"/><path d="M8 6H5a3 3 0 0 0 3 4M16 6h3a3 3 0 0 1-3 4"/><path d="M12 13v4M8.5 20h7"/>',
 }
 
@@ -114,6 +116,7 @@ _NAV_SHAPES = {
              '<rect x="16.1" y="4.6" width="2.4" height="4.6" rx="0.8" fill="{P}"/>'),
     "heart": '<path d="M12 21s-9-5.2-9-11.6A5 5 0 0 1 12 6.6a5 5 0 0 1 9 2.8C21 15.8 12 21 12 21z" fill="{P}" stroke="{P}" stroke-width="0.8" stroke-linejoin="round"/>',
     "settings": f'<path d="{_gear_poly()}" fill="{{P}}" stroke="{{P}}" stroke-width="1.1" stroke-linejoin="round"/>',
+    "explore": '<circle cx="12" cy="12" r="9.6" fill="{P}" stroke="{P}" stroke-width="0.8"/>',
 }
 _NAV_DETAILS = {
     "home": ('<path d="M12 4.1 19.7 10.9H4.3z" fill="#fff" fill-opacity="{lo}"/>'
@@ -125,6 +128,9 @@ _NAV_DETAILS = {
     "settings": ('<circle cx="12" cy="12" r="3.5" fill="{cut}"/>'
                  '<circle cx="12" cy="12" r="3.5" fill="none" stroke="#000" stroke-opacity="0.18" stroke-width="0.8"/>'
                  '<path d="M5.6 8.3A7.2 7.2 0 0 1 11.2 4.9" stroke="#fff" stroke-opacity="{hi}" stroke-width="1.2" fill="none" stroke-linecap="round"/>'),
+    "explore": ('<path d="M16.2 7.8 13.6 13.6 7.8 16.2 10.4 10.4z" fill="{cut}"/>'
+                '<circle cx="12" cy="12" r="1.15" fill="#fff" fill-opacity="{hi}"/>'
+                '<path d="M5.4 9A7.2 7.2 0 0 1 10.6 4.7" stroke="#fff" stroke-opacity="{hi}" stroke-width="1.2" fill="none" stroke-linecap="round"/>'),
 }
 _nav_cache = {}
 

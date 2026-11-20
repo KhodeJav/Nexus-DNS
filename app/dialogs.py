@@ -1,8 +1,8 @@
 """Frameless, themed dialogs (add/edit DNS, group name, confirm, results, event log)."""
-from PySide6.QtCore import QPoint, Qt, Signal
+from PySide6.QtCore import QPoint, QRectF, Qt, Signal
 from PySide6.QtWidgets import (QDialog, QFrame, QGraphicsDropShadowEffect, QHBoxLayout, QLabel, QLineEdit,
                                QPushButton, QScrollArea, QSizePolicy, QVBoxLayout, QWidget, QButtonGroup)
-from PySide6.QtGui import QColor
+from PySide6.QtGui import QColor, QPainter
 
 from . import dns_bench as bench
 from .skin import col, skin, tr
@@ -22,11 +22,6 @@ class BaseDialog(QDialog):
         outer.setContentsMargins(14, 14, 14, 14)
         self.panel = QFrame()
         self.panel.setObjectName("dialogPanel")
-        shadow = QGraphicsDropShadowEffect(self.panel)
-        shadow.setBlurRadius(36)
-        shadow.setOffset(0, 8)
-        shadow.setColor(QColor(0, 0, 0, 150))
-        self.panel.setGraphicsEffect(shadow)
         outer.addWidget(self.panel)
         v = QVBoxLayout(self.panel)
         v.setContentsMargins(20, 14, 20, 20)
@@ -44,6 +39,18 @@ class BaseDialog(QDialog):
         v.addLayout(self.body)
         self.setMinimumWidth(width)
         self._drag = None
+
+    def paintEvent(self, e):
+        """Soft shadow drawn by hand. (A QGraphicsDropShadowEffect on the panel re-renders its children from a cached
+        picture, which left the previously focused input box half-painted - cut corners and edges.)"""
+        p = QPainter(self)
+        p.setRenderHint(QPainter.Antialiasing)
+        p.setPen(Qt.NoPen)
+        r = QRectF(self.panel.geometry()).translated(0, 5)
+        for i in range(9, 0, -1):
+            p.setBrush(QColor(0, 0, 0, 9))
+            p.drawRoundedRect(r.adjusted(-i, -i, i, i), 24 + i, 24 + i)
+        p.end()
 
     def _host(self):
         p = self.parentWidget()
@@ -148,7 +155,7 @@ class GroupDialog(BaseDialog):
 
 
 class DnsDialog(BaseDialog):
-    def __init__(self, parent, groups, dns=None, default_group=None):
+    def __init__(self, parent, groups, dns=None, default_group=None, prefill=None):
         super().__init__(parent, "dlg_edit_dns" if dns else "dlg_add_dns", width=380)
         self.groups = groups
         self.name = _field(self, "f_name")
@@ -176,6 +183,10 @@ class DnsDialog(BaseDialog):
             self._select_group(dns["group_id"])
         elif default_group is not None:
             self._select_group(default_group)
+        if prefill and not dns:                      # a new entry whose fields are already known (e.g. from Explore)
+            self.name.setText(prefill.get("name", ""))
+            self.primary.setText(prefill.get("primary", ""))
+            self.secondary.setText(prefill.get("secondary", ""))
         self.values = None
         self.name.setFocus()
 

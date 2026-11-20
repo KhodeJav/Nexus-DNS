@@ -1,4 +1,4 @@
-"""Nexus DNS - entry point."""
+"""DNS Changer - entry point."""
 import logging
 import os
 import sys
@@ -34,7 +34,7 @@ def main():
             pass
     QGuiApplication.setHighDpiScaleFactorRoundingPolicy(Qt.HighDpiScaleFactorRoundingPolicy.PassThrough)
     app = QApplication(sys.argv)
-    app.setApplicationName("Nexus DNS")
+    app.setApplicationName("DNS Changer")
     app.setQuitOnLastWindowClosed(False)
     app.setWindowIcon(QIcon(resource_path("assets/icon.png")))
 
@@ -44,13 +44,24 @@ def main():
     lock = QLockFile(str(data_dir() / "app.lock"))
     if not lock.tryLock(200):
         skin.apply()
-        QMessageBox.information(None, "Nexus DNS", tr("already_running"))
+        QMessageBox.information(None, "DNS Changer", tr("already_running"))
         return 0
 
     skin.apply()
+    # forced update: ask GitHub first; a version below the minimum cannot enter the app until it is updated
+    from app.update_ui import UpdateGate
+    gate = UpdateGate(db)
+    gate.check()
+    gate.wait()
+    if gate.must_quit:                       # the update is being installed (or the user chose Exit)
+        lock.unlock()
+        db.close()
+        return 0
     from app.main_window import MainWindow
     win = MainWindow(db)
+    gate.win = win                           # a late answer (slow network) still blocks the app
     win.show()
+    gate.start_timer()
     code = app.exec()
     lock.unlock()
     db.close()

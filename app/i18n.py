@@ -1,7 +1,7 @@
 """All user-visible text, Persian and English. Brand/technical terms stay in English."""
 
 FA = {
-    "app_name": "Nexus DNS",
+    "app_name": "DNS Changer",
     "tagline": "سریع • پایدار • بهینه",
     "nav_home": "خانه", "nav_fav": "علاقه‌مندی‌ها", "nav_settings": "تنظیمات",
     # titlebar / header
@@ -33,7 +33,7 @@ FA = {
     "progress_single": "نمونه {seq} از {count}",
     "btn_stop": "توقف",
     # status words
-    "st_ok": "کامل", "st_timeout": "TimeOut", "st_unavailable": "UNAVAILABLE", "st_incomplete": "ناقص",
+    "st_ok": "کامل", "st_timeout": "TIMEOUT", "st_unavailable": "UNAVAILABLE", "st_incomplete": "ناقص",
     # toasts / errors
     "msg_offline_connect": "اینترنت قطع است؛ DNS تغییر نکرد.",
     "msg_offline_test": "اینترنت قطع است؛ تست شروع نشد.",
@@ -98,7 +98,7 @@ FA = {
     "sec_data": "داده‌ها", "clear_results": "پاک کردن نتایج ذخیره‌شده", "open_data": "باز کردن پوشه‌ی داده‌ها",
     "about": "درباره‌ی برنامه", "version": "نسخه {v}",
     "sec_about": "درباره‌ی پروژه",
-    "about_desc": "Nexus DNS ابزاری برای ویندوز است که DNS های مختلف را با ارسال درخواست‌های واقعی DNS تست می‌کند (میانگین پینگ، Jitter و Packet Loss برای هر دو سرور Primary و Secondary)، بهترین گزینه را به شما نشان می‌دهد و با یک کلیک آن را روی کارت شبکه‌ی فعال اعمال می‌کند؛ هر زمان خواستید DNS قبلی دقیقاً برمی‌گردد.",
+    "about_desc": "DNS Changer ابزاری برای ویندوز است که DNS های مختلف را با ارسال درخواست‌های واقعی DNS تست می‌کند (میانگین پینگ، Jitter و Packet Loss برای هر دو سرور Primary و Secondary)، بهترین گزینه را به شما نشان می‌دهد و با یک کلیک آن را روی کارت شبکه‌ی فعال اعمال می‌کند؛ هر زمان خواستید DNS قبلی دقیقاً برمی‌گردد.",
     "about_github": "گیت‌هاب پروژه", "about_donate": "حمایت مالی (Donate)",
     "about_telegram": "پشتیبانی در تلگرام", "about_channel": "کانال تلگرام پروژه",
     # tray / log
@@ -110,10 +110,31 @@ FA = {
     "ev_test_done": "تست کامل شد: {n} DNS", "ev_test_cancelled": "تست متوقف شد",
     "ev_test_offline": "تست به‌دلیل قطعی اینترنت متوقف شد", "ev_started": "برنامه اجرا شد",
     "already_running": "برنامه از قبل در حال اجراست (شاید در System Tray).",
+    # explore
+    "nav_explore": "Explore",
+    "ex_title": "DNS Explorer", "ex_sub": "سرورهای DNS عمومی را پیدا و تست کنید.",
+    "ex_test_all": "تست پینگ همه", "ex_refresh": "به‌روزرسانی فهرست",
+    "ex_loading": "در حال دریافت فهرست…", "ex_updated": "آخرین به‌روزرسانی فهرست: {t}",
+    "ex_offline": "آفلاین؛ آخرین فهرست ذخیره‌شده نمایش داده می‌شود", "ex_count": "{n} DNS",
+    "ex_err_network": "دریافت فهرست ممکن نشد. اینترنت را بررسی کنید و دوباره تلاش کنید.",
+    "ex_err_invalid": "فایل دریافتی معتبر نیست، به همین دلیل نمایش داده نشد.",
+    "ex_retry": "تلاش دوباره", "ex_empty": "فعلاً DNS ای در فهرست نیست.",
+    "ex_progress": "در حال تست DNS ها", "ex_last": "آخرین پینگ", "ex_testing": "در حال تست…",
+    "ex_not_tested": "تست نشده", "ex_st_error": "ERROR", "ex_busy": "یک تست دیگر در حال اجراست.",
+    "ex_err_test": "تست به‌دلیل یک خطای داخلی انجام نشد.", "ex_unknown_country": "کشور نامشخص",
+    "upd_title": "به‌روزرسانی ضروری",
+    "upd_msg": "نسخه‌ی {new} منتشر شده و برای ادامه باید نصب شود. نسخه‌ی شما: {cur}",
+    "upd_btn": "نصب به‌روزرسانی", "upd_retry": "تلاش دوباره", "upd_exit": "خروج",
+    "upd_downloading": "در حال دانلود… {p}٪", "upd_installing": "در حال نصب و راه‌اندازی مجدد…",
+    "upd_err": "دانلود ناموفق بود. اینترنت را بررسی کنید و دوباره تلاش کنید.",
+    "upd_nolink": "لینک دانلود هنوز تنظیم نشده است.",
+    "tip_search": "جستجوی گروه", "search_group": "نام گروه را جستجو کنید…", "no_group_found": "گروهی پیدا نشد.",
+    "tip_collapse": "باز و بسته کردن گروه",
+    "ex_select": "انتخاب", "ex_all_countries": "همه کشورها (پیش‌فرض)",
 }
 
 EN = {
-    "app_name": "Nexus DNS",
+    "app_name": "DNS Changer",
     "tagline": "Fast • Stable • Optimized",
     "nav_home": "Home", "nav_fav": "Favorites", "nav_settings": "Settings",
     "tip_flush": "Flush DNS cache & turn DNS off", "tip_events": "Events", "tip_hide_tray": "Hide to System Tray",
@@ -130,7 +151,7 @@ EN = {
     "connected_to": "Connected to {name}",
     "test_group": "Group test", "test_group_sub": "Test every DNS in the group",
     "test_single": "Manual test", "test_single_sub": "Test one specific DNS",
-    "last_ping": "Last Ping:", "avg_ping": "Average ping", "jitter": "Jitter", "packet_loss": "Packet Loss",
+    "last_ping": "Last ping:", "avg_ping": "Average ping", "jitter": "Jitter", "packet_loss": "Packet Loss",
     "not_tested": "Not tested",
     "tip_default": "For best results run a group test first so the best DNS can be found.",
     "quick_connect": "Quick Connect",
@@ -141,7 +162,7 @@ EN = {
     "progress_counts": "Tested: {done} of {total} · Remaining: {left}",
     "progress_single": "Sample {seq} of {count}",
     "btn_stop": "Stop",
-    "st_ok": "Complete", "st_timeout": "TimeOut", "st_unavailable": "UNAVAILABLE", "st_incomplete": "Incomplete",
+    "st_ok": "Complete", "st_timeout": "TIMEOUT", "st_unavailable": "UNAVAILABLE", "st_incomplete": "Incomplete",
     "msg_offline_connect": "You're offline; DNS was not changed.",
     "msg_offline_test": "You're offline; the test was not started.",
     "msg_test_offline_mid": "Internet dropped; the test was stopped.",
@@ -201,7 +222,7 @@ EN = {
     "sec_data": "Data", "clear_results": "Clear saved results", "open_data": "Open data folder",
     "about": "About", "version": "Version {v}",
     "sec_about": "About the project",
-    "about_desc": "Nexus DNS is a Windows tool that tests DNS servers with real DNS queries (average ping, jitter and packet loss for both the Primary and Secondary server), shows you the best one and applies it to your active network adapter in one click. Your previous DNS is restored exactly whenever you want.",
+    "about_desc": "DNS Changer is a Windows tool that tests DNS servers with real DNS queries (average ping, jitter and packet loss for both the Primary and Secondary server), shows you the best one and applies it to your active network adapter in one click. Your previous DNS is restored exactly whenever you want.",
     "about_github": "Project on GitHub", "about_donate": "Support / Donate",
     "about_telegram": "Telegram support", "about_channel": "Project Telegram channel",
     "tray_open": "Open", "tray_exit": "Exit",
@@ -212,6 +233,27 @@ EN = {
     "ev_test_done": "Test finished: {n} DNS", "ev_test_cancelled": "Test stopped",
     "ev_test_offline": "Test stopped: internet lost", "ev_started": "App started",
     "already_running": "The app is already running (maybe in the System Tray).",
+    # explore
+    "nav_explore": "Explore",
+    "ex_title": "DNS Explorer", "ex_sub": "Discover and benchmark public DNS servers.",
+    "ex_test_all": "Test All", "ex_refresh": "Refresh list",
+    "ex_loading": "Loading the list…", "ex_updated": "List updated: {t}",
+    "ex_offline": "Offline - showing the last saved list", "ex_count": "{n} DNS",
+    "ex_err_network": "Could not load the list. Check your internet connection and try again.",
+    "ex_err_invalid": "The downloaded file is not valid, so it was not used.",
+    "ex_retry": "Try again", "ex_empty": "There are no DNS servers in the list yet.",
+    "ex_progress": "Testing DNS Servers", "ex_last": "Last Ping", "ex_testing": "Testing…",
+    "ex_not_tested": "Not tested", "ex_st_error": "ERROR", "ex_busy": "Another test is running.",
+    "ex_err_test": "The test failed because of an internal error.", "ex_unknown_country": "Unknown country",
+    "upd_title": "Update required",
+    "upd_msg": "Version {new} is out and must be installed to continue. Your version: {cur}",
+    "upd_btn": "Install update", "upd_retry": "Try again", "upd_exit": "Exit",
+    "upd_downloading": "Downloading… {p}%", "upd_installing": "Installing and restarting…",
+    "upd_err": "Download failed. Check your internet connection and try again.",
+    "upd_nolink": "The download link has not been set yet.",
+    "tip_search": "Search groups", "search_group": "Search group name…", "no_group_found": "No group found.",
+    "tip_collapse": "Expand / collapse group",
+    "ex_select": "Select", "ex_all_countries": "All countries (default)",
 }
 
 STRINGS = {"fa": FA, "en": EN}

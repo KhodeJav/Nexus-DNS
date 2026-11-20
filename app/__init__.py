@@ -1,2 +1,2 @@
-__version__ = "1.0.0"
-APP_NAME = "Nexus DNS"
+__version__ = "1.2.0"
+APP_NAME = "DNS Changer"

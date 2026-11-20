@@ -1,9 +1,11 @@
 """Background threads. Nothing in here touches widgets; results travel via signals."""
 import logging
+import threading
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 from PySide6.QtCore import QThread, Signal
 
-from . import dns_bench, netcheck
+from . import dns_bench, explorer, netcheck, updater
 from . import windows_dns as wd
 from .validators import parse_ipv4
 
@@ -63,6 +65,112 @@ class BenchmarkThread(QThread):
                 return
             self.dns_done.emit(dns_id, role, res.to_dict())
         self.finished_all.emit("done")
+
+
+class ParallelBenchmarkThread(BenchmarkThread):
+    """Same engine (dns_bench.run_benchmark, same count / timeout / maths) but several servers at once.
+
+    Every server still gets exactly the same test as in BenchmarkThread; only the waiting is shared, so a long
+    list finishes in a fraction of the time. Each worker has its own UDP socket."""
+    WORKERS = 6
+
+    def __init__(self, items, count, timeout_ms, workers=None, parent=None):
+        super().__init__(items, count, timeout_ms, parent)
+        self.workers = max(1, min(int(workers or self.WORKERS), 10))
+
+    def _run(self):
+        cancel = self.isInterruptionRequested
+        if not netcheck.check_internet().online:
+            self.finished_all.emit("offline")
+            return
+        total = len(self.items)
+        lock = threading.Lock()
+        state = {"offline": False}
+
+        def task(idx, item):
+            dns_id, role, name, ip = item
+            if cancel() or state["offline"]:
+                return
+            self.dns_started.emit(idx, total, dns_id, role, name, ip)
+            res = dns_bench.run_benchmark(
+                ip, self.count, self.timeout, cancel=cancel,
+                on_sample=lambda seq, ms, d=dns_id: self.sample.emit(d, seq, -1.0 if ms is None else ms))
+            if res.status == dns_bench.CANCELLED:
+                return
+            if res.status != dns_bench.OK:
+                with lock:                                   # one check is enough for everybody
+                    if not state["offline"] and not netcheck.check_internet().online:
+                        state["offline"] = True
+                if state["offline"]:
+                    return                                   # the failure is the user's connection, not this DNS
+            self.dns_done.emit(dns_id, role, res.to_dict())
+
+        with ThreadPoolExecutor(max_workers=self.workers) as pool:
+            futures = [pool.submit(task, i, it) for i, it in enumerate(self.items)]
+            for f in as_completed(futures):
+                try:
+                    f.result()
+                except Exception:
+                    log.exception("benchmark worker crashed")
+        if state["offline"]:
+            self.finished_all.emit("offline")
+        elif cancel():
+            self.finished_all.emit("cancelled")
+        else:
+            self.finished_all.emit("done")
+
+
+class ExplorerFetchThread(QThread):
+    """Download + validate the DNS Explorer list. Emits (ok, changed, cache_dict | error_code)."""
+    done = Signal(bool, bool, object)
+
+    def __init__(self, cache, parent=None):
+        super().__init__(parent)
+        self.cache = cache
+
+    def run(self):
+        try:
+            changed, fresh = explorer.fetch(self.cache)
+            self.done.emit(True, changed, fresh)
+        except explorer.ExplorerError as e:
+            self.done.emit(False, False, e.code)
+        except Exception:
+            log.exception("explorer download crashed")
+            self.done.emit(False, False, "invalid")
+
+
+class UpdateCheckThread(QThread):
+    """Ask GitHub for the newest Release. Emits (ok, info_dict | error_code)."""
+    done = Signal(bool, object)
+
+    def run(self):
+        try:
+            self.done.emit(True, updater.check().to_dict())
+        except updater.UpdateError as e:
+            self.done.emit(False, e.code)
+        except Exception:
+            log.exception("update check crashed")
+            self.done.emit(False, "invalid")
+
+
+class UpdateDownloadThread(QThread):
+    """Download the installer. Emits progress(done, total) and finished_ok(ok, path | error_code)."""
+    progress = Signal(int, int)
+    finished_ok = Signal(bool, str)
+
+    def __init__(self, url, parent=None):
+        super().__init__(parent)
+        self.url = url
+
+    def run(self):
+        try:
+            path = updater.download(self.url, lambda a, b: self.progress.emit(a, b), self.isInterruptionRequested)
+            self.finished_ok.emit(True, path)
+        except updater.UpdateError as e:
+            self.finished_ok.emit(False, e.code)
+        except Exception:
+            log.exception("update download crashed")
+            self.finished_ok.emit(False, "download")
 
 
 class ApplyThread(QThread):

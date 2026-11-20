@@ -228,7 +228,7 @@ class SettingsPage(QScrollArea):
             title.setText(tr(key))
         for chev in self.chev_labels:
             chev.set_icon("chevron_left" if skin.rtl else "chevron_right")
-        self.about.setText(f"Nexus DNS · {tr('version', v=__version__)}")
+        self.about.setText(f"DNS Changer · {tr('version', v=__version__)}")
         if not self._adapter_thread:
             self.val_adapter.setText(getattr(self, "_adapter_text", tr("adapter_unknown")))
 
